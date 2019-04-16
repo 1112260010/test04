@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="armet" class="dao.spring.dayNetwork.Equip">
+        <property name="name" value="战神头盔"></property>
+        <property name="type" value="头盔"></property>
+        <property name="speedPlus" value="2"></property>
+        <property name="attackPlus" value="4"></property>
+        <property name="defencePlus" value="6"></property>
+    </bean>
+    <bean id="loricae" class="dao.spring.dayNetwork.Equip">
+        <property name="name" value="连环锁子甲"></property>
+        <property name="type" value="盔甲"></property>
+        <property name="speedPlus" value="6"></property>
+        <property name="attackPlus" value="4"></property>
+        <property name="defencePlus" value="15"></property>
+    </bean>
+    <bean id="boot" class="dao.spring.dayNetwork.Equip">
+        <property name="name" value="波斯追风靴"></property>
+        <property name="type" value="靴子"></property>
+        <property name="speedPlus" value="8"></property>
+        <property name="attackPlus" value="2"></property>
+        <property name="defencePlus" value="3"></property>
+    </bean>
+    <bean id="ring" class="dao.spring.dayNetwork.Equip">
+        <property name="name" value="蓝魔指环"></property>
+        <property name="type" value="指环"></property>
+        <property name="speedPlus" value="8"></property>
+        <property name="attackPlus" value="12"></property>
+        <property name="defencePlus" value="2"></property>
+    </bean>
+    <bean id="ring2" class="dao.spring.dayNetwork.Equip">
+        <property name="name" value="紫色梦幻蓝魔指环"></property>
+        <property name="type" value="指环"></property>
+        <property name="speedPlus" value="8"></property>
+        <property name="attackPlus" value="18"></property>
+        <property name="defencePlus" value="8"></property>
+    </bean>
+    <bean id="player" class="dao.spring.dayNetwork.Player">
+        <property name="armet" ref="armet"></property>
+        <property name="loricae" ref="loricae"></property>
+        <property name="boot" ref="boot"></property>
+        <property name="ring" ref="ring"></property>
+    </bean>
+    <bean id="util" class="dao.spring.dayNetwork.Util"></bean>
+    <aop:config>
+        <!--切点-->
+        <aop:pointcut id="mypoint" expression="execution(* dao.spring.dayNetwork.Player.pint(..))"></aop:pointcut>
+        <!--织入-->
+        <aop:advisor advice-ref="util" pointcut-ref="mypoint"></aop:advisor>
+    </aop:config>
+</beans>

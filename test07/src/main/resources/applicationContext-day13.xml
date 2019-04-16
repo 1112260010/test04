@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--目标对象-->
+    <bean id="hello" class="dao.spring.day13Aspectj.Hello"></bean>
+    <!--增强对象-->
+    <bean id="myAspect" class="dao.spring.day13Aspectj.MyAspect"></bean>
+
+    <!--&lt;!&ndash;寻址注解&ndash;&gt;
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>-->
+
+    <!--config配置-->
+    <aop:config>
+        <!--切点-->
+        <aop:pointcut id="mypoint" expression="execution(* *..*.day13Aspectj.Hello.do*(..))"></aop:pointcut>
+        <!--切面-->
+        <aop:aspect ref="myAspect2">
+            <!--&lt;!&ndash;前置增强&ndash;&gt;
+            <aop:before method="myBefore" pointcut-ref="mypoint"></aop:before>
+            &lt;!&ndash;后置增强&ndash;&gt;
+            <aop:after-returning method="myAfterReturning" pointcut-ref="mypoint"></aop:after-returning>-->
+            <!--环绕增强-->
+            <aop:around method="myAround" pointcut-ref="mypoint"></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

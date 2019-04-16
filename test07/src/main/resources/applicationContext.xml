@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-    <bean id="helloSpring" class="cn.Spring.day01.HelloSpring"></bean>
-
-    <bean id="a4Paper" class="cn.Spring.day01.A4Paper"></bean>
-    <bean id="colorInk" class="cn.Spring.day01.ColorInk"></bean>
-    <bean id="printer" class="cn.Spring.day01.Printer">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--IOC和DI(set方法注入)-->
+    <bean id="helloSpring" class="dao.spring.day01.HelloSpring"></bean>
+    <bean id="a4Paper" class="dao.spring.day01.A4Paper"></bean>
+    <bean id="colorInk" class="dao.spring.day01.ColorInk"></bean>
+    <bean id="printer" class="dao.spring.day01.Printer">
         <property name="ink" ref="colorInk"></property>
         <property name="paper" ref="a4Paper"></property>
     </bean>
+
+    <!--构造注入-->
+    <!--<bean id="car" class="dao.spring.day03zhuru.constructor.Car">
+        <property name="brand">
+            <value>宝马</value>
+        </property>
+        <property name="no" value="京A0000"></property>
+    </bean>
+    <bean id="person" class="dao.spring.day03zhuru.constructor.Person">
+        <constructor-arg index="0" value="张三"></constructor-arg>
+        <constructor-arg index="1" ref="car"></constructor-arg>
+    </bean>-->
+
+    <!--p命名空间注入-->
+    <bean id="car3" class="dao.spring.day03zhuru.constructor.Car">
+        <property name="brand" value="吉普"></property>
+        <property name="no" value="京A0001"></property>
+    </bean>
+    <bean id="person3" class="dao.spring.day03zhuru.constructor.Person" p:name="王五" p:car-ref="car3"></bean>
+
+    <!--自动注入-->
+    <!--<bean id="car1" class="dao.spring.day03zhuru.constructor.Car">
+        <property name="brand">
+            <value>奔驰</value>
+        </property>
+        <property name="no" value="京A0000"></property>
+    </bean>
+    <bean id="person1" class="dao.spring.day03zhuru.constructor.Person" autowire="byType">
+        <property name="name" value="李四"></property>
+    </bean>-->
+
+    <!--数组，集合注入-->
+    <bean id="person2" class="dao.spring.day03zhuru.constructor.Person" autowire="byType">
+        <!--数组-->
+        <property name="stus">
+            <array>
+                <value>中国</value>
+                <value>美国</value>
+                <value>日本</value>
+            </array>
+        </property>
+        <!--list集合-->
+        <property name="list">
+            <list>
+                <value>中国list</value>
+                <value>美国list</value>
+                <value>日本list</value>
+            </list>
+        </property>
+        <!--set集合-->
+        <property name="set">
+            <set>
+                <value>中国set</value>
+                <value>美国set</value>
+                <value>日本set</value>
+            </set>
+        </property>
+        <!--map集合-->
+        <property name="map">
+            <map>
+                <entry key="k1" value="v1"></entry>
+                <entry key="k2" value="v2"></entry>
+                <entry key="k3" value="v3"></entry>
+            </map>
+        </property>
+        <!--properties集合-->
+        <property name="properties">
+            <props>
+                <prop key="p1">v1</prop>
+                <prop key="p2">v2</prop>
+                <prop key="p3">v3</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!--dao层实现类-->
+    <bean id="userDao" class="dao.spring.day02Before.dao.impl.UserDaoImpl"></bean>
+    <!--service层实现类-->
+    <bean id="userService" class="dao.spring.day02Before.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <!--Aop切面类-->
+    <bean id="beforeAdvice" class="dao.spring.day02Before.BeforeAdvice"></bean>
+    <aop:config>
+        <!--切点 expression的值是要切入的具体的方法-->
+        <aop:pointcut id="mypoint" expression="execution(* dao.spring.day02Before.service.impl.UserServiceImpl.save*(..))"></aop:pointcut>
+        <!--织入-->
+        <aop:advisor advice-ref="beforeAdvice" pointcut-ref="mypoint"></aop:advisor>
+
+    </aop:config>
 </beans>

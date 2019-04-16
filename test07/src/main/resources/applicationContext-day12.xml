@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--目标对象-->
+    <bean id="hello" class="dao.spring.day12autoProxy.Hello"></bean>
+    <!--增强对象-->
+    <bean id="beforeAdvice" class="dao.spring.day12autoProxy.MyBeforeAdvice"></bean>
+
+    <!--名字匹配方法切入点顾问-->
+    <bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="advice" ref="beforeAdvice"></property>
+        <property name="mappedNames" value="doHello"></property>
+    </bean>
+
+    <!--正则切入点顾问-->
+    <bean id="myadvisor1" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="beforeAdvice"></property>
+        <property name="patterns" value=".*doHello2.*"></property>
+    </bean>
+
+    <!--&lt;!&ndash;自动代理  默认advisor自动代理生成器&ndash;&gt;
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+    </bean>-->
+
+    <!--自动代理  beanName自动代理-->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="interceptorNames" value="beforeAdvice"></property>
+        <property name="beanNames" value="hello"></property>
+    </bean>
+</beans>

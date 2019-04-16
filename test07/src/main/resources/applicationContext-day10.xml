@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--目标对象-->
+    <bean id="hello" class="dao.spring.day10ProxyFactoryBean.Hello"></bean>
+    <!--前置增强对象-->
+    <bean id="beforeAdvice" class="dao.spring.day10ProxyFactoryBean.MyBeforeAdvice"></bean>
+    <!--后置增强对象-->
+    <bean id="afterAdvice" class="dao.spring.day10ProxyFactoryBean.MyAfterAdvice"></bean>
+    <!--环绕增强对象-->
+    <bean id="arroundAdvice" class="dao.spring.day10ProxyFactoryBean.MyArroundAdvice"></bean>
+    <!--异常增强对象-->
+    <bean id="throwAdvice" class="dao.spring.day10ProxyFactoryBean.MyThrowAdvice"></bean>
+    <!--AOP-->
+    <!--代理工厂bean 生成的代理对象-->
+    <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--目标对象-->
+        <property name="targetName" value="hello"></property>
+        <!--增强对象-->
+
+        <!--&lt;!&ndash;前置增强&ndash;&gt;
+        <property name="interceptorNames" value="beforeAdvice"></property>-->
+
+        <!--&lt;!&ndash;后置增强&ndash;&gt;
+        <property name="interceptorNames" value="afterAdvice"></property>-->
+
+        <!--&lt;!&ndash;环绕增强&ndash;&gt;
+        <property name="interceptorNames" value="arroundAdvice"></property>-->
+
+        <!--异常增强-->
+        <property name="interceptorNames" value="throwAdvice"></property>
+    </bean>
+
+
+</beans>
