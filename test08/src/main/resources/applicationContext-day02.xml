@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--处理器映射器-->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/*">123</prop>
+            </props>
+        </property>
+    </bean>
+    <!--注册方法名称解析器-->
+    <bean id="propertiesMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+        <!--当添加该属性时，地址栏的方法名称就变成了add-->
+        <!--属性方法名称解析器-->
+        <!--对类的方法名称进行保护-->
+        <property name="mappings">
+            <props>
+                <prop key="/add">doAdd</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--注册处理器-->
+    <bean id="123" class="cn.springmvc.day02handler.controller.MyMultiActionController">
+        <property name="methodNameResolver" ref="propertiesMethodNameResolver"></property>
+    </bean>
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--方案二：使用mvc的default-servlet-handler-->
+    <!--<mvc:default-servlet-handler/>-->
+
+    <!--方案三：使用mvc的rescources -->
+    <!--location:静态资源所在目录-->
+    <!--mapping：对资源的请求-->
+    <mvc:resources location="/image/" mapping="/image/**"/>
+</beans>

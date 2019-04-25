@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--处理器映射器-->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/as.do">abc</prop>
+            </props>
+        </property>
+    </bean>
+    <!--注册处理器-->
+    <bean id="abc"  class="cn.springmvc.day01.controller.FirstController"></bean>
+    <!--视图解析器-->
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>-->
+
+    <!--方案二：使用mvc的default-servlet-handler-->
+    <mvc:default-servlet-handler/>
+
+    <!--方案三：使用mvc的rescources -->
+    <!--location:静态资源所在目录-->
+    <!--mapping：对资源的请求-->
+    <mvc:resources location="/image/" mapping="/image/**"/>
+</beans>
