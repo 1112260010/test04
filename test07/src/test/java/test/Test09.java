@@ -1,6 +1,6 @@
 package test;
 
-import dao.spring.day09Cglibproxy.Hello;
+import cn.spring.day09Cglibproxy.Hello;
 import org.junit.Test;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;

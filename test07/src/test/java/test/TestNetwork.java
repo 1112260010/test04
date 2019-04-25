@@ -1,7 +1,7 @@
 package test;
 
-import dao.spring.dayNetwork.Equip;
-import dao.spring.dayNetwork.Player;
+import cn.spring.dayNetwork.Equip;
+import cn.spring.dayNetwork.Player;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

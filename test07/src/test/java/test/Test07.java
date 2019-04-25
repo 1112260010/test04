@@ -1,7 +1,7 @@
 package test;
 
-import dao.spring.day07StaticProxy.ProxySubject;
-import dao.spring.day07StaticProxy.RealSubject;
+import cn.spring.day07StaticProxy.ProxySubject;
+import cn.spring.day07StaticProxy.RealSubject;
 import org.junit.Test;
 
 public class Test07 {

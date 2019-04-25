@@ -1,9 +1,9 @@
 package test;
 
-import dao.spring.daySingleton.Single1;
-import dao.spring.daySingleton.Single2;
-import dao.spring.daySingleton.Single3;
-import dao.spring.daySingleton.Single4;
+import cn.spring.daySingleton.Single1;
+import cn.spring.daySingleton.Single2;
+import cn.spring.daySingleton.Single3;
+import cn.spring.daySingleton.Single4;
 import org.junit.Test;
 
 public class TestSingleton {

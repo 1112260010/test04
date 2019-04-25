@@ -8,9 +8,9 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--目标对象-->
-    <bean id="hello" class="dao.spring.day12autoProxy.Hello"></bean>
+    <bean id="hello" class="cn.spring.day12autoProxy.Hello"></bean>
     <!--增强对象-->
-    <bean id="beforeAdvice" class="dao.spring.day12autoProxy.MyBeforeAdvice"></bean>
+    <bean id="beforeAdvice" class="cn.spring.day12autoProxy.MyBeforeAdvice"></bean>
 
     <!--名字匹配方法切入点顾问-->
     <bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
@@ -30,7 +30,7 @@
 
     <!--自动代理  beanName自动代理-->
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-        <property name="interceptorNames" value="beforeAdvice"></property>
+        <property name="interceptorNames" value="myadvisor1"></property>
         <property name="beanNames" value="hello"></property>
     </bean>
 </beans>

@@ -1,7 +1,7 @@
 package test;
 
-import dao.spring.day04BeforeAndAfter.User;
-import dao.spring.day04BeforeAndAfter.service.UserService;
+import cn.spring.day04BeforeAndAfter.User;
+import cn.spring.day04BeforeAndAfter.service.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

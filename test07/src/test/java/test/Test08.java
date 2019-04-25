@@ -1,7 +1,7 @@
 package test;
 
-import dao.spring.day08Bean.Hello;
-import dao.spring.day08Bean.HelloService;
+import cn.spring.day08Bean.Hello;
+import cn.spring.day08Bean.HelloService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

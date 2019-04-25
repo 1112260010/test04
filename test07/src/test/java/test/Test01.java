@@ -1,8 +1,8 @@
 package test;
 
-import dao.spring.day01.Printer;
-import dao.spring.day02Before.User;
-import dao.spring.day02Before.service.UserService;
+import cn.spring.day01.Printer;
+import cn.spring.day02Before.User;
+import cn.spring.day02Before.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.junit.Test;

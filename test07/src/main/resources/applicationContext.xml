@@ -4,46 +4,46 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!--IOC和DI(set方法注入)-->
-    <bean id="helloSpring" class="dao.spring.day01.HelloSpring"></bean>
-    <bean id="a4Paper" class="dao.spring.day01.A4Paper"></bean>
-    <bean id="colorInk" class="dao.spring.day01.ColorInk"></bean>
-    <bean id="printer" class="dao.spring.day01.Printer">
+    <bean id="helloSpring" class="cn.spring.day01.HelloSpring"></bean>
+    <bean id="a4Paper" class="cn.spring.day01.A4Paper"></bean>
+    <bean id="colorInk" class="cn.spring.day01.ColorInk"></bean>
+    <bean id="printer" class="cn.spring.day01.Printer">
         <property name="ink" ref="colorInk"></property>
         <property name="paper" ref="a4Paper"></property>
     </bean>
 
     <!--构造注入-->
-    <!--<bean id="car" class="dao.spring.day03zhuru.constructor.Car">
+    <!--<bean id="car" class="cn.spring.day03zhuru.constructor.Car">
         <property name="brand">
             <value>宝马</value>
         </property>
         <property name="no" value="京A0000"></property>
     </bean>
-    <bean id="person" class="dao.spring.day03zhuru.constructor.Person">
+    <bean id="person" class="cn.spring.day03zhuru.constructor.Person">
         <constructor-arg index="0" value="张三"></constructor-arg>
         <constructor-arg index="1" ref="car"></constructor-arg>
     </bean>-->
 
     <!--p命名空间注入-->
-    <bean id="car3" class="dao.spring.day03zhuru.constructor.Car">
+    <bean id="car3" class="cn.spring.day03zhuru.constructor.Car">
         <property name="brand" value="吉普"></property>
         <property name="no" value="京A0001"></property>
     </bean>
-    <bean id="person3" class="dao.spring.day03zhuru.constructor.Person" p:name="王五" p:car-ref="car3"></bean>
+    <bean id="person3" class="cn.spring.day03zhuru.constructor.Person" p:name="王五" p:car-ref="car3"></bean>
 
     <!--自动注入-->
-    <!--<bean id="car1" class="dao.spring.day03zhuru.constructor.Car">
+    <!--<bean id="car1" class="cn.spring.day03zhuru.constructor.Car">
         <property name="brand">
             <value>奔驰</value>
         </property>
         <property name="no" value="京A0000"></property>
     </bean>
-    <bean id="person1" class="dao.spring.day03zhuru.constructor.Person" autowire="byType">
+    <bean id="person1" class="cn.spring.day03zhuru.constructor.Person" autowire="byType">
         <property name="name" value="李四"></property>
     </bean>-->
 
     <!--数组，集合注入-->
-    <bean id="person2" class="dao.spring.day03zhuru.constructor.Person" autowire="byType">
+    <bean id="person2" class="cn.spring.day03zhuru.constructor.Person" autowire="byType">
         <!--数组-->
         <property name="stus">
             <array>
@@ -88,16 +88,16 @@
 
 
     <!--dao层实现类-->
-    <bean id="userDao" class="dao.spring.day02Before.dao.impl.UserDaoImpl"></bean>
+    <bean id="userDao" class="cn.spring.day02Before.dao.impl.UserDaoImpl"></bean>
     <!--service层实现类-->
-    <bean id="userService" class="dao.spring.day02Before.service.impl.UserServiceImpl">
+    <bean id="userService" class="cn.spring.day02Before.service.impl.UserServiceImpl">
         <property name="userDao" ref="userDao"></property>
     </bean>
     <!--Aop切面类-->
-    <bean id="beforeAdvice" class="dao.spring.day02Before.BeforeAdvice"></bean>
+    <bean id="beforeAdvice" class="cn.spring.day02Before.BeforeAdvice"></bean>
     <aop:config>
         <!--切点 expression的值是要切入的具体的方法-->
-        <aop:pointcut id="mypoint" expression="execution(* dao.spring.day02Before.service.impl.UserServiceImpl.save*(..))"></aop:pointcut>
+        <aop:pointcut id="mypoint" expression="execution(* cn.spring.day02Before.service.impl.UserServiceImpl.save*(..))"></aop:pointcut>
         <!--织入-->
         <aop:advisor advice-ref="beforeAdvice" pointcut-ref="mypoint"></aop:advisor>
 

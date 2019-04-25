@@ -1,6 +1,6 @@
 package test;
 
-import dao.spring.day03zhuru.constructor.Person;
+import cn.spring.day03zhuru.constructor.Person;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -8,26 +8,33 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--目标对象-->
-    <bean id="hello" class="dao.spring.day13Aspectj.Hello"></bean>
+    <bean id="hello" class="cn.spring.day13Aspectj.Hello"></bean>
     <!--增强对象-->
-    <bean id="myAspect" class="dao.spring.day13Aspectj.MyAspect"></bean>
+    <bean id="myAspect" class="cn.spring.day13Aspectj.MyAspect"></bean>
 
-    <!--&lt;!&ndash;寻址注解&ndash;&gt;
-    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>-->
+    <!--寻址注解-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
-    <!--config配置-->
+    <!--&lt;!&ndash;config配置&ndash;&gt;
     <aop:config>
-        <!--切点-->
+        &lt;!&ndash;切点&ndash;&gt;
         <aop:pointcut id="mypoint" expression="execution(* *..*.day13Aspectj.Hello.do*(..))"></aop:pointcut>
-        <!--切面-->
+        &lt;!&ndash;切面&ndash;&gt;
         <aop:aspect ref="myAspect2">
-            <!--&lt;!&ndash;前置增强&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;前置增强&ndash;&gt;
             <aop:before method="myBefore" pointcut-ref="mypoint"></aop:before>
             &lt;!&ndash;后置增强&ndash;&gt;
-            <aop:after-returning method="myAfterReturning" pointcut-ref="mypoint"></aop:after-returning>-->
-            <!--环绕增强-->
-            <aop:around method="myAround" pointcut-ref="mypoint"></aop:around>
+            <aop:after-returning method="myAfterReturning" pointcut-ref="mypoint"></aop:after-returning>&ndash;&gt;
+
+            &lt;!&ndash;&lt;!&ndash;环绕增强&ndash;&gt;
+            <aop:around method="myAround" pointcut-ref="mypoint"></aop:around>&ndash;&gt;
+
+            &lt;!&ndash;异常增强&ndash;&gt;
+            <aop:after-throwing method="myAfterThrowing" pointcut-ref="mypoint"></aop:after-throwing>
+
+            &lt;!&ndash;最终增强&ndash;&gt;
+            <aop:after method="myAfter" pointcut-ref="mypoint"></aop:after>
         </aop:aspect>
-    </aop:config>
+    </aop:config>-->
 
 </beans>

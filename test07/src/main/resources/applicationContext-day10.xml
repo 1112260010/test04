@@ -8,15 +8,15 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--目标对象-->
-    <bean id="hello" class="dao.spring.day10ProxyFactoryBean.Hello"></bean>
+    <bean id="hello" class="cn.spring.day10ProxyFactoryBean.Hello"></bean>
     <!--前置增强对象-->
-    <bean id="beforeAdvice" class="dao.spring.day10ProxyFactoryBean.MyBeforeAdvice"></bean>
+    <bean id="beforeAdvice" class="cn.spring.day10ProxyFactoryBean.MyBeforeAdvice"></bean>
     <!--后置增强对象-->
-    <bean id="afterAdvice" class="dao.spring.day10ProxyFactoryBean.MyAfterAdvice"></bean>
+    <bean id="afterAdvice" class="cn.spring.day10ProxyFactoryBean.MyAfterAdvice"></bean>
     <!--环绕增强对象-->
-    <bean id="arroundAdvice" class="dao.spring.day10ProxyFactoryBean.MyArroundAdvice"></bean>
+    <bean id="arroundAdvice" class="cn.spring.day10ProxyFactoryBean.MyArroundAdvice"></bean>
     <!--异常增强对象-->
-    <bean id="throwAdvice" class="dao.spring.day10ProxyFactoryBean.MyThrowAdvice"></bean>
+    <bean id="throwAdvice" class="cn.spring.day10ProxyFactoryBean.MyThrowAdvice"></bean>
     <!--AOP-->
     <!--代理工厂bean 生成的代理对象-->
     <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">

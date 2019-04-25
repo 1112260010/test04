@@ -6,16 +6,16 @@
 
     <!--AOP切面-->
     <!--dao层实现类-->
-    <bean id="userDao" class="dao.spring.day04BeforeAndAfter.dao.impl.UserDaoImpl"></bean>
+    <bean id="userDao" class="cn.spring.day04BeforeAndAfter.dao.impl.UserDaoImpl"></bean>
     <!--service层实现类-->
-    <bean id="userService" class="dao.spring.day04BeforeAndAfter.service.impl.UserServiceImpl">
+    <bean id="userService" class="cn.spring.day04BeforeAndAfter.service.impl.UserServiceImpl">
         <property name="userDao" ref="userDao"></property>
     </bean>
     <!--Aop切面类-->
-    <bean id="beforeAdvice" class="dao.spring.day04BeforeAndAfter.BeforeAdvice"></bean>
+    <bean id="beforeAdvice" class="cn.spring.day04BeforeAndAfter.BeforeAdvice"></bean>
     <aop:config>
         <!--切点 expression的值是要切入的具体的方法-->
-        <aop:pointcut id="mypoint" expression="execution(* dao.spring.day04BeforeAndAfter.service.impl.UserServiceImpl.save*(..))"></aop:pointcut>
+        <aop:pointcut id="mypoint" expression="execution(* cn.spring.day04BeforeAndAfter.service.impl.UserServiceImpl.save*(..))"></aop:pointcut>
         <!--织入-->
         <aop:aspect ref="beforeAdvice">
             <aop:before method="before" pointcut-ref="mypoint"></aop:before>

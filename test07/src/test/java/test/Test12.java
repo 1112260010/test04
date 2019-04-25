@@ -1,7 +1,7 @@
 package test;
 
 
-import dao.spring.day12autoProxy.Hello;
+import cn.spring.day12autoProxy.Hello;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,6 +1,6 @@
 package test;
 
-import dao.spring.day10ProxyFactoryBean.Hello;
+import cn.spring.day10ProxyFactoryBean.Hello;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
