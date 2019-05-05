@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <context:component-scan base-package="cn"/>
+    <!--识别外部jdbc.properties文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <!--spring内置数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.userName}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+    <!--dao层-->
+    <!--自动扫描指定包下的mapper接口，实现类为类名首字母小写-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.dao"></property>
+    </bean>
+
+    <!--配置SqlSessionFactoryBean-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--引用mybatis配置文件中的配置-->
+        <property name="configLocation" value="classpath:mybatis.xml"></property>
+    </bean>
+
+    <!--事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--事务处理-->
+    <!--方式三：AspectJ配置事务-->
+    <tx:advice id="advice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--给特定的方法的事务定规则（细化）-->
+            <tx:method name="addBook" isolation="DEFAULT" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="select*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"></tx:method>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <!--切点-->
+        <!--切点表达式匹配的方法都是切点-->
+        <aop:pointcut id="mypoint" expression="execution(* *..service.*.*(..))"></aop:pointcut>
+        <!--织入-->
+        <aop:advisor advice-ref="advice" pointcut-ref="mypoint"></aop:advisor>
+    </aop:config>
+
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <!--注解驱动-->
+    <mvc:annotation-driven/>
+</beans>

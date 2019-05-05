@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.ProjectMapper">
+  <resultMap id="BaseResultMap" type="cn.entity.Project">
+    <id column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="projectName" jdbcType="VARCHAR" property="projectname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, projectName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where pid = #{pid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from project
+    where pid = #{pid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.entity.Project">
+    insert into project (pid, projectName)
+    values (#{pid,jdbcType=BIGINT}, #{projectname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.entity.Project">
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="projectname != null">
+        projectName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="projectname != null">
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.entity.Project">
+    update project
+    <set>
+      <if test="projectname != null">
+        projectName = #{projectname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.entity.Project">
+    update project
+    set projectName = #{projectname,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=BIGINT}
+  </update>
+<!--查询所有项目-->
+  <select id="findAllProject" resultType="Project">
+    select * from project
+  </select>
+</mapper>
