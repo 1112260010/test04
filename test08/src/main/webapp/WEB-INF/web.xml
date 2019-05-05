@@ -4,6 +4,37 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <!--全局servlet可用-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext-day11ssm.xml</param-value>
+  </context-param>
+  <!--编码过滤器-->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <!--设置请求编码的字符集-->
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+    <!--true：响应的编码与请求的编码一致-->
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--Spring和web整合-->
+
+  <!--配置监听器-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
   <!--配置核心控制器DispatcherServlet(中央调度器)-->
   <servlet>
     <servlet-name>springmvc</servlet-name>
@@ -19,7 +50,7 @@
    <!--配置文件放在src目录下时，需要初始化参数；如果是放在web-info下，需要名字匹配（springmvc-servlet.xml）且不用init-param节点-->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:applicationContext-day05.xml</param-value>
+      <param-value>classpath:applicationContext-day11ssm.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -32,10 +63,16 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+
+
   <!--静态资源不能处理-->
   <!--方案1：使用Tomcat默认的servlet处理-->
   <!--<servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.jpg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
   </servlet-mapping>-->
 </web-app>

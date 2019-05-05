@@ -1,18 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: wtc
-  Date: 2019/4/23
-  Time: 9:59
+  Date: 2019/4/26
+  Time: 11:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    <p>hello Springmvc${info}</p>
-<img src="/image/1.jpg"/>
+    <h2>${sessionScope.obj}</h2>
+
 </body>
 </html>
